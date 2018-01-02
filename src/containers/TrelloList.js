@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addTodo, moveItem } from '../actions'
 import TodoList from '../components/TodoList'
 
-import { ADD_TODO, ADD_IN_PROGRESS, ADD_DONE, MOVE_TO_TODO, MOVE_TO_IN_PROGRESS, MOVE_TO_DONE } from '../actions';
+import { ADD_TODO, MOVE_TO_TODO, MOVE_TO_IN_PROGRESS, MOVE_TO_DONE } from '../actions';
 
 const getTodos = ( todos, status) => {
 
@@ -19,17 +19,19 @@ class ItemContainer extends Component{
 		
 		let addInput, progressInput, doneInput;
 		const { todos } = this.props;
-		const { onTodoClick, addTodoClick } = this.props;
+		const { onItemDrag, addTodoClick } = this.props;
 		const todoItems = getTodos( todos, 'TODO');
 		const progressItems = getTodos( todos, 'IN-PROGRESS');
 		const completedItems = getTodos( todos, 'DONE');
 
 		return(
+
+
 			<div className="flex">
 
 					<div className="item-list">
 						<h2> TODO </h2>
-						<TodoList todos={todoItems} onTodoClick={onTodoClick} />
+						<TodoList todos={todoItems} onItemDrag={onItemDrag} action={MOVE_TO_TODO} />
 						<form onSubmit={ e => {
 							e.preventDefault();
 							if ( !addInput.value.trim() ) {
@@ -49,42 +51,12 @@ class ItemContainer extends Component{
 
 					<div className="item-list">
 						<h2> In Progress </h2>
-						<TodoList todos={progressItems} onTodoClick={onTodoClick}  />
-						<form onSubmit={ e => {
-							e.preventDefault();
-							if ( !progressInput.value.trim() ) {
-								return;
-							}
-							addTodoClick(progressInput.value, ADD_IN_PROGRESS)
-							progressInput.value = ''
-						}}>
-							<input ref= { node => {
-								progressInput = node
-							}} />
-							<button type='submit'>
-								Add Todo
-							</button>
-						</form>
+						<TodoList todos={progressItems} onItemDrag={onItemDrag} action={MOVE_TO_IN_PROGRESS} />
 					</div>
 
 					<div className="item-list">
 						<h2> Done </h2>
-						<TodoList todos={completedItems} onTodoClick={onTodoClick}  />
-						<form onSubmit={ e => {
-							e.preventDefault();
-							if ( !doneInput.value.trim() ) {
-								return;
-							}
-							addTodoClick(doneInput.value, ADD_DONE)
-							doneInput.value = ''
-						}}>
-							<input ref= { node => {
-								doneInput = node
-							}} />
-							<button type='submit'>
-								Add Todo
-							</button>
-						</form>
+						<TodoList todos={completedItems} onItemDrag={onItemDrag} action={MOVE_TO_DONE} />
 					</div>
 
 			</div>
@@ -102,8 +74,8 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
 	return {
-		onTodoClick : ( id ) => {
-			dispatch( moveItem(id) )
+		onItemDrag : ( type, id ) => {
+			dispatch( moveItem( type, id) )
 		},
 		addTodoClick : ( text, type) =>{
 			dispatch ( addTodo(text, type) )

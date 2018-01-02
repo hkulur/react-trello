@@ -16,6 +16,7 @@ li{
 
 ul{
     padding : 0;
+    min-height: 300px;
 }
 
 .item-list{
@@ -32,4 +33,5 @@ ul{
 }
 .item-list li{
     padding : 5px 0;
+    cursor: move;
 }

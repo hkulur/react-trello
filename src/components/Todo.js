@@ -1,12 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Todo = ({ onClick, completed, text}) => (
-	<li draggable="true"
-		onClick = {onClick}
-		style = {{
-			textDecoration : completed ? 'line-through' : 'none'
-		}}
-	>
+	<li draggable="true">
 		{text}
 	</li>
 )

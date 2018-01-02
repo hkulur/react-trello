@@ -11,21 +11,6 @@ const todo = ( state = {}, action) => {
 					text : action.text,
 					status : 'TODO'
 				}
-		case ADD_IN_PROGRESS :
-
-				return {
-					id : action.id,
-					text : action.text,
-					status : 'IN-PROGRESS'
-				}
-
-		case ADD_DONE :
-
-				return {
-					id : action.id,
-					text : action.text,
-					status : 'DONE'
-				}
 
 		case MOVE_TO_TODO : 
 
@@ -66,8 +51,6 @@ const todos = (state=[], action) => {
 	switch(action.type){
 
 		case ADD_TODO :
-		case ADD_IN_PROGRESS :
-		case ADD_DONE :
 
 			return [
 					...state,
