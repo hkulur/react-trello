@@ -12,17 +12,20 @@ const getTodos = ( todos, status) => {
 	return todos.filter( t => t.status === status )
 }
 
-
+const STATUS = {
+	TODO: 'TODO',
+	IN_PROGRESS: 'IN-PROGRESS',
+	DONE: 'DONE',
+};
 class ItemContainer extends Component{
 
 	render() {
 		
 		let addInput, progressInput, doneInput;
-		const { todos } = this.props;
-		const { onItemDrag, addTodoClick } = this.props;
-		const todoItems = getTodos( todos, 'TODO');
-		const progressItems = getTodos( todos, 'IN-PROGRESS');
-		const completedItems = getTodos( todos, 'DONE');
+		const { todos, onItemDrag, addTodoClick } = this.props;
+		const todoItems = getTodos( todos, STATUS.TODO);
+		const progressItems = getTodos( todos, STATUS.IN_PROGRESS);
+		const completedItems = getTodos( todos, STATUS.DONE);
 
 		return(
 
