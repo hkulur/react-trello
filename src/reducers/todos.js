@@ -16,7 +16,7 @@ const todo = ( state = {}, action) => {
 
 		case MOVE_TO_TODO : 
 
-				if( state.id !== action.id ){g
+				if( state.id !== action.id ){
 					return state
 				}
 
