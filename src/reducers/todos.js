@@ -1,3 +1,5 @@
+
+// Todo reducers
 import { ADD_TODO, ADD_IN_PROGRESS, ADD_DONE, MOVE_TO_TODO, MOVE_TO_IN_PROGRESS, MOVE_TO_DONE } from '../actions';
 
 const todo = ( state = {}, action) => {
