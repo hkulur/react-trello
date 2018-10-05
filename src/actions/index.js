@@ -8,7 +8,7 @@ export const MOVE_TO_DONE = 'MOVE_TO_DONE'
 export const addTodo = (text, type) => {
   return {
     type,
-    id: Date.now(),
+    id: Date.now().toString(), // Make a current time as a id 
     text
   }
 }
